@@ -7,7 +7,7 @@ const app = express()
 const port = 3000
 app.use(cors())
 const corsOptions = {
-    origin: 'https://back-for-portfolio.vercel.app/',
+    origin: 'http://localhost:3000',
     optionsSuccessStatus: 200
 }
 
