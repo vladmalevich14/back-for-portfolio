@@ -4,7 +4,7 @@ const cors = require("cors");
 const bodyParser = require('body-parser')
 
 const app = express()
-const port = 3010
+const port = 3000
 app.use(cors())
 
 app.use(bodyParser.urlencoded({extended: false}))
@@ -23,7 +23,8 @@ app.get('/', (req, res) => {
 })
 
 app.post('/sendMessage', async (req, res) => {
-
+    console.log(req)
+    console.log(res)
     const {name, phone, email, message} = req.body
     const info = await transporter.sendMail({
         from: 'HR WANTS ME',
