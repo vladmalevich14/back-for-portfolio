@@ -6,12 +6,11 @@ const bodyParser = require('body-parser')
 const app = express()
 const port = 3000
 app.use(cors())
-app.use((req, res, next) => {
-    res.setHeader("Access-Control-Allow-Origin", "*");
-    res.setHeader("Access-Control-Allow-Methods", "POST, GET, PUT");
-    res.setHeader("Access-Control-Allow-Headers", "Content-Type");
-    next();
-})
+const corsOptions = {
+    origin: 'https://back-for-portfolio.vercel.app/',
+    optionsSuccessStatus: 200
+}
+
 app.use(bodyParser.urlencoded({extended: false}))
 app.use(bodyParser.json())
 
@@ -27,7 +26,7 @@ app.get('/', (req, res) => {
     res.send('Hello World!')
 })
 
-app.post('/sendMessage', async (req, res) => {
+app.post('/sendMessage', cors(corsOptions), async (req, res) => {
     console.log(req)
     console.log(res)
     const {name, phone, email, message} = req.body
