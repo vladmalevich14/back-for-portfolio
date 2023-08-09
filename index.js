@@ -5,10 +5,11 @@ const bodyParser = require('body-parser')
 
 const app = express()
 const port = 3010
-app.use(cors({
+app.use(cors())
+const corsOptions = {
     origin: '*',
     methods: ['GET','POST','DELETE','UPDATE','PUT','PATCH']
-}))
+}
 app.use(bodyParser.urlencoded({extended: false}))
 app.use(bodyParser.json())
 
@@ -24,7 +25,7 @@ app.get('/', (req, res) => {
     res.send('Hello World!')
 })
 
-app.post('/sendMessage', async (req, res) => {
+app.post('/sendMessage', cors(corsOptions), async (req, res) => {
     console.log(req)
     console.log(res)
     const {name, phone, email, message} = req.body
