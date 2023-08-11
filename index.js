@@ -43,7 +43,7 @@ message: ${message}
 </div>
 `
     });
-    res.send('blablabla')
+    req.send('blablabla')
 })
 
 app.listen(port, () => {
