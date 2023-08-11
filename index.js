@@ -42,15 +42,7 @@ email: ${email}
 message: ${message}
 </div>
 `
-    }, (error, info)=>{
-            if (error) {
-                console.log(error);
-                return;
-            }
-            console.log('Message sent');
-            transporter.close();
-        }
-        );
+    });
     res.send('blablabla')
 })
 
