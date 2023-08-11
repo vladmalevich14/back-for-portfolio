@@ -1,12 +1,12 @@
 const express = require('express')
+const cors = require('cors')
 const nodemailer = require("nodemailer");
-const cors = require("cors");
 const bodyParser = require('body-parser')
 
 const app = express()
 const port = 3010
+
 app.use(cors())
-app.options('*', cors())
 app.use(bodyParser.urlencoded({extended: false}))
 app.use(bodyParser.json())
 
@@ -26,7 +26,7 @@ app.post('/sendMessage', async (req, res) => {
     const {name, phone, email, message} = req.body
     const info = await transporter.sendMail({
         from: 'HR WANTS ME',
-        to: "Vlad",
+        to: "vladmalevich1431@gmail.com",
         subject: "HR WANTS ME",
         html: `<b>Сообщение с вашего портфолио:</b>
 <div>
@@ -42,7 +42,15 @@ email: ${email}
 message: ${message}
 </div>
 `
-    });
+    }, (error, info)=>{
+            if (error) {
+                console.log(error);
+                return;
+            }
+            console.log('Message sent');
+            transporter.close();
+        }
+        );
     res.send('blablabla')
 })
 
